@@ -30,12 +30,19 @@ public class Test {
     }
 
     public void uploadImage() {
+        System.setProperty("java.io.tmpdir", "/Users/simranpreetkaur/Desktop/images/");
+        File tempFile = null;
+
         File initialFile = new File("/Users/simranpreetkaur/Desktop/images/rose.jpeg");
+        File outFile = new File("/Users/simranpreetkaur/Desktop/images/rose3.jpeg");
+
         FileInputStream fis = null;
         FileOutputStream fos=null;
         InputStream targetStream = null;
         try {
+            tempFile = File.createTempFile("rose5", ".jpeg");
              targetStream = FileUtils.openInputStream(initialFile);
+            FileUtils.copyInputStreamToFile(targetStream,tempFile);
             String mimeType = URLConnection.guessContentTypeFromStream(targetStream);
             System.out.println(mimeType);
         }catch(Exception e) {
@@ -52,10 +59,10 @@ public class Test {
         op.resize(450);
        // Scanner sc = new Scanner(System.in);
       //  String format = sc.nextLine();
-        op.addImage("png:-");
+        op.addImage(":-");
         try {
             fis = new FileInputStream(imageDire + "rose.jpeg");
-            fos = new FileOutputStream(imageDire + "rose1.png");
+            fos = new FileOutputStream(imageDire + "rose1.jpeg");
         } catch(FileNotFoundException f) {
             f.printStackTrace();;
         }
